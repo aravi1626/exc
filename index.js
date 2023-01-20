@@ -13,10 +13,10 @@ app.listen(port, async () => {
 });
 
 // const start = async (cValue) => {
-//   const res = await generateCSV("alpine", cValue);
+//   const res = await generateCSV('alpine', cValue);
 //   if (res.cursor) start(res.cursor);
 // };
 
 // start();
 
-generateCSV('test');
+generateCSV('alpine');

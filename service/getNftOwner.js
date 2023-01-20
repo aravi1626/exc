@@ -17,14 +17,14 @@ const getNftOwner = async (cursorValue) => {
     response = await Moralis.EvmApi.nft.getNFTOwners({
       address,
       chain,
-      limit: 5,
+      limit: 100,
       cursor: cursorValue,
     });
   } else {
     response = await Moralis.EvmApi.nft.getNFTOwners({
       address,
       chain,
-      limit: 5,
+      limit: 100,
     });
   }
 
