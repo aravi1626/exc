@@ -21,16 +21,20 @@ const generate = async (fileName) => {
 };
 
 async function generateCSV(fileName, cursorValue) {
+  console.log('🚀 ~ file: generateCSV.js:32 ~ generateCSV ~ data', data.length);
   const { cursor, result } = await getNFTOwners(cursorValue);
-  console.log('🚀 ~ file: generateCSV.js:7 ~ generateCSV ~ cursor', cursor);
-  if (cursor && data.length < 1527) {
+  if (cursor && data.length < 1526) {
     data = [...data, ...result];
     generateCSV(fileName, cursor);
   } else {
+    data = [...data, ...result];
+    console.log('🚀 ~ file: generateCSV.js:7 ~ generateCSV ~ cursor', cursor);
+    console.log(
+      '🚀 ~ file: generateCSV.js:32 ~ generateCSV ~ data',
+      data.length
+    );
     generate(fileName);
   }
-
-  console.log(data.length, 'total assets');
 }
 
 module.exports = generateCSV;
