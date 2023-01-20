@@ -3,20 +3,37 @@ const getNFTOwners = require('./getNftOwner');
 const getTokenType = require('../helper/getTokenType');
 
 let data = [];
+let owners = [];
 
 const generate = async (fileName) => {
   data.forEach(async (element, i) => {
-    const tokenType = await getTokenType(element.token_id);
-    console.log(
-      '🚀 ~ file: generateCSV.js:14 ~ result.forEach ~ tokenType',
-      tokenType
-    );
-    const objCsv = `${element.token_id},${element.owner_of},${tokenType}\n`;
+    const tokenType = await getTokenType(element.token_id, fileName);
 
-    FS.appendFile(`./csv/${fileName}.csv`, objCsv, (err) => {
-      if (err) console.log("🚀 ~ coundn't append data ~ err", err);
-      console.log('the data was appended to file');
-    });
+    if (fileName === tokenType) {
+      console.log(
+        '🚀 ~ file: generateCSV.js:14 ~ result.forEach ~ tokenType',
+        tokenType
+      );
+
+      const objCsv = `${element.token_id},${element.owner_of},${tokenType}\n`;
+
+      FS.appendFile(`./csv/${fileName}.csv`, objCsv, (err) => {
+        if (err) console.log("🚀 ~ coundn't append data ~ err", err);
+        console.log('the data was appended to file');
+      });
+    } else if (fileName === 'all') {
+      console.log(
+        '🚀 ~ file: generateCSV.js:14 ~ result.forEach ~ tokenType',
+        tokenType
+      );
+
+      const objCsv = `${element.token_id},${element.owner_of},${tokenType}\n`;
+
+      FS.appendFile(`./csv/${fileName}.csv`, objCsv, (err) => {
+        if (err) console.log("🚀 ~ coundn't append data ~ err", err);
+        console.log('the data was appended to file');
+      });
+    }
   });
 };
 

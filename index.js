@@ -19,4 +19,4 @@ app.listen(port, async () => {
 
 // start();
 
-generateCSV('alpine');
+generateCSV('ultraRare');

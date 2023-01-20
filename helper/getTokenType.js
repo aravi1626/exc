@@ -9,17 +9,16 @@ Web3EthContract.setProvider(PROVIDER);
 
 const contract = new Web3EthContract(CONTRACT_ABI, CONTRACT_ADDRESS);
 
-const getTokenType = async (id) => {
+const getTokenType = async (id, nftypeName) => {
   let nftType;
   let token = Number(id);
   let tokenId = Number(id);
-
   const tokenURI = await contract.methods.NFTtype(tokenId).call();
 
-  if (tokenURI == 1) {
+  if (tokenURI == 1 && (nftypeName === 'legendary' || nftypeName === 'all')) {
     nftType = 'legendary';
   } else if (
-    tokenURI == 2 ||
+    ((nftypeName === 'ultraRare' || nftypeName === 'all') && tokenURI == 2) ||
     (tokenURI == 0 && (token == 1522 || 1523 || 1524))
   ) {
     if (token >= 0 && token < 8) {
@@ -37,7 +36,10 @@ const getTokenType = async (id) => {
     if (token > 1521 && token <= 1525) {
       nftType = 'ultraRare';
     }
-  } else if (tokenURI == 3) {
+  } else if (
+    (nftypeName === 'common' || nftypeName === 'all') &&
+    tokenURI == 3
+  ) {
     if (tokenId > 1500 && tokenId <= 1521) {
       tokenId = tokenId - 1500;
     } else if (tokenId === 1522) {
